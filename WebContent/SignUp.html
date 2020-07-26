@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+<script type="text/javascript" src="script/script1.js">
+</script>
+
+<!-- <script type="text/javascript">
+	window.onbeforeunload = function() {
+		return "";
+	}
+</script> -->
+<style>
+@IMPORT url("css/style.css");
+</style>
+</head>
+<body>
+
+	<form action="SignUpServlet" onsubmit="return validate()" method="post">
+		<h1>Sign Up Page</h1>
+		<div class="form-group">
+			<input class="form-control" placeholder="enter id" name="id" id="id">
+			<span id="err_id"></span>
+		</div>
+
+		<div class="form-group">
+			<input class="form-control" placeholder="enter  name" name="name"
+				id="name"> <span id="err_name"></span>
+		</div>
+
+		Gender<br> <span id="err_gender"></span>
+		<div class="form-check">
+			<label class="form-check-label"> <input type="radio"
+				class="form-check-input" name="gender" id="gender" value="male">Male
+			</label>
+		</div>
+		<div class="form-check">
+			<label class="form-check-label"> <br> <input
+				type="radio" class="form-check-input" name="gender" id="gender"
+				value="female">Female
+			</label>
+		</div>
+
+		<div class="form-group">
+			<input type="password" class="form-control"
+				placeholder="enter password start with alphabet of length 7 to 15 and can have alphabets and numbers with _ "
+				id="pass" name="pass"> <span id="err_pass"></span>
+		</div>
+		<div class="form-group">
+			<input type="password" id="repass" class="form-control"
+				placeholder="enter re password" name="repass"> <span
+				id="err_repass"></span>
+		</div>
+
+		<div class="form-group">
+			<input class="form-control" placeholder="enter  email" name="email"
+				id="email"> <span id="err_email"></span>
+		</div>
+
+		<div class="form-group">
+			<input class="form-control" placeholder="enter  age" name="age"
+				id="age" type="number"> <span id="err_age"></span>
+		</div>
+
+		<div class="form-group">
+			<input class="form-control" placeholder="enter  country"
+				name="country" id="country"> <span id="err_country"></span>
+		</div>
+
+
+		<input type="submit" value="Register" class="btn btn-primary">
+		<input type="reset" value="Cancel" class="btn btn-primary">
+	</form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script>
+
+function getdata() {
+
+	var xmlhttpreq = new XMLHttpRequest();
+	xmlhttpreq.open("GET","data1.txt")
+	
+	xmlhttpreq.onreadystatechange=function(){
+		if(xmlhttpreq.readyState==4 && xmlhttpreq.status==200){
+			document.getElementById("id2").innerHTML = xmlhttpreq.responseText
+		}
+	};
+	xmlhttpreq.send(null)
+}
+
+function getdata1() {
+
+	var xmlhttpreq = new XMLHttpRequest();
+	xmlhttpreq.open("GET","data2.txt")
+	
+	xmlhttpreq.onreadystatechange=function(){
+		if(xmlhttpreq.readyState==4 && xmlhttpreq.status==200){
+			document.getElementById("id2").innerHTML = xmlhttpreq.responseText
+		}
+	};
+	xmlhttpreq.send(null)
+}
+
+</script>
+</head>
+<body>
+
+<div id="id2" onclick="getdata()">
+click here
+</div>
+
+
+<div id="id3" onclick="getdata1()">
+what is html
+</div>
+
+
+
+</body>
+</html>

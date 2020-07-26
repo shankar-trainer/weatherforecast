@@ -1,0 +1,45 @@
+/* Set a cursor and font-size on hover of search history items */
+.search-history-click:hover {
+    cursor: pointer;
+    font-size: 17px;
+}
+
+/* set to display none */
+.hide {
+    display: none;
+}
+
+span#err{
+	text-align: center;
+	color: red;
+	margin-left: 100px;
+} 
+
+.test a{
+  padding:30px;
+}
+
+span{
+	text-align: center;
+	color: red;
+} 
+
+
+h1 {
+	text-align: center;
+}
+h1.logout {
+	text-align: center;
+	color: blue;
+	margin-top: 200px;
+}
+
+form {
+	width: 53%;
+	margin-left: 400px;
+	background: aqua;
+	//padding: 10px;
+	border: double 10px;
+	border-radius: 25px;
+	font-size:small;
+}

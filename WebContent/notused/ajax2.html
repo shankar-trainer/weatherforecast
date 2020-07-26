@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script>
+
+url="http://api.openweathermap.org/data/2.5/uvi?APPID=9497495fcb2dd582affb661398fb07ad&lat=52.52&lon=13.41"
+
+var xhreq = new XMLHttpRequest();
+xhreq.open('GET', url, true)
+	xhreq.onreadystatechange=function(){
+		if(xhreq.readyState==4 && xhreq.status==200){
+			data = xhreq.responseText
+			var obj = JSON.parse(data)
+			document.getElementById("id2").innerHTML =obj.value 
+		}
+	};
+	xhreq.send(null)
+
+</script>
+</head>
+<body>
+
+<div id="id2" >
+</div>
+
+</body>
+</html>

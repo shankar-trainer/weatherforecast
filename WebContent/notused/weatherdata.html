@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script>
+	var getJSON = function(url, callback) {
+
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', url, true)
+		xhr.responseType = 'json'
+
+		xhr.onload = function() {
+			var status = xhr.status
+			if (status == 200) {
+				callback(null, xhr.response)
+			} else {
+				callback(status)
+			}
+		};
+		xhr.send()
+	};
+
+	var url = "http://api.openweathermap.org/data/2.5/weather?zip=851101,in&APPID=9497495fcb2dd582affb661398fb07ad"
+	getJSON(url, function(err, data) {
+		if (err != null) {
+			console.log(err);
+		} else {
+			var cord1 = "Longitude " + data.coord.lon + "<br>Latitude"
+					+ data.coord.lat
+			document.getElementById('cord').innerHTML = cord1
+
+			var weather = "Id " + data.weather[0].id + "<br>Main"
+					+ data.weather[0].main + "<br>Description"
+					+ data.weather[0].description
+			document.getElementById('wea').innerHTML = weather
+
+			var main = "Temperature " + data.main.temp + "<br>Min "
+					+ data.main.temp_min + "<br>Max " + data.main.temp_max
+					+ "<br>Pressure " + data.main.pressure + "<br>Sea Level "
+					+ data.main.sea_level + "<br>Ground Level"
+					+ data.main.grnd_level
+			document.getElementById('main').innerHTML = main
+			var wind = "Speed" + data.wind.speed + "<br>Degree "
+					+ data.wind.deg
+			document.getElementById('wind').innerHTML = wind
+		}
+	})
+</script>
+
+</head>
+<body>
+
+	<h2>Coordinates</h2>
+
+	<div id="cord"></div>
+
+	<h2>Weather</h2>
+
+	<div id="wea"></div>
+
+	<h2>Main</h2>
+
+	<div id="main"></div>
+
+
+
+	<h2>Wind</h2>
+
+	<div id="wind"></div>
+
+
+
+	<h2>Rain</h2>
+
+	<div id="wind"></div>
+
+</body>
+</html>
