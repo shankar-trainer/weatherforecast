@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+
+function send(e,form) {
+  fetch(form.action,{method:'post', body: new FormData(form)});
+   
+  console.log('We send post asynchronously (AJAX)');
+  e.preventDefault();
+}
+
+</script>
+<form method="POST" action="myapi/send" onsubmit="send(event,this)">
+    <input  name="crsfToken" value="a1e24s1">
+    <input name="email" value="a@b.com">
+    <input name="phone" value="123-456-789">
+    <input type="submit">    
+</form>
+
+
+
+</body>
+</html>
