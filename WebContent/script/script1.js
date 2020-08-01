@@ -1,13 +1,10 @@
 function timer1(){
 	console.log("timer called ")
 x=10;
-setInterval(() => {
+setInterval(function() {
 document.getElementById('id1').innerHTML=--x;	
 }, 1000);
-
 }
-
-
 
 function validate() {
 		var id = document.getElementById('id').value
@@ -103,7 +100,7 @@ function validate() {
 		else if (country == "") {
 			document.getElementById('err_country').innerHTML = "country is blank"
 			return false;
-			//([a-z]|[A-Z]+)/.test("india")
+			// ([a-z]|[A-Z]+)/.test("india")
 		} else if (!/([a-z]|[A-Z]+)/.test(country)) {
 			document.getElementById('err_country').innerHTML = "country  can not contain  numeric value"
 			return false;
@@ -132,7 +129,11 @@ var getJSON = function(url) {
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', url, true)
 		xhr.responseType = 'json'
-		
+			var mytemp=new Array(5);
+  		var myhumidity=new Array(5);
+  		var mydate=new Array(5);
+
+			
 		xhr.onload = function() {
 			var status = xhr.status
 			if (status == 200) {
@@ -155,7 +156,8 @@ var getJSON = function(url) {
 				// ==================== uv idex
 				var lat = data.coord.lat
 				var lon = data.coord.lon
-               	 
+               	// console.log("lat "+lat)
+               	// console.log("longitude "+lon)
 				var url1 = "http://api.openweathermap.org/data/2.5/uvi?APPID=9497495fcb2dd582affb661398fb07ad&lat="
 						+ lat + "&lon=" + lon
 
@@ -172,30 +174,14 @@ var getJSON = function(url) {
 					}
 				};
 				xhreq.send(null)
-				// ===============================end of uvi
+	// ===============================end of uvi====
 
-				// ==========================start forecast
+	// ==========================start forecast
 				    document.getElementById("forecast").innerHTML=""
-				
-				const proxyurl = "https://cors-anywhere.herokuapp.com/";
-				const url2 = "http://localhost:9090/Ajax/notused/hello.html"; // site
-																				// that
-				fetch(proxyurl + url2) // https://cors-anywhere.herokuapp.com/https://example.com
-				.then(response => response.text())
-				.then(contents => console.log(contents))
-				.catch(() => console.log("Can’t access " + url2 + " response. Blocked by browser?"))
-
-				
-				 // header.append('Access-Control-Allow-Origin','http://localhost:3000');
-                // header.append('Access-Control-Allow-Credentials', 'true');
-				// --
-				// header('Access-Control-Allow-Headers: *');
-               // header('Access-Control-Allow-Headers: Origin, Content-Type,
-				// X-Auth-Token');
-
-
 				url3 = "https://api.openweathermap.org/data/2.5/forecast?q="+data.name+"&units=imperial&appid=f4465c08026d2de3e9ae72cb65313ea1"
-			console.log("city is "+data.name)
+			
+							
+				
 					var xhreq1 = new XMLHttpRequest();
 					xhreq1.open('GET', url3, true)
 					xhreq1.onreadystatechange = function() {
@@ -204,9 +190,7 @@ var getJSON = function(url) {
 							var data = JSON.parse(data1)
 							document.getElementById('weather-forecast-div').style.display = "block"
 						
-								 console.log("forecast called  "+data.list.dt)
-								
-				                var dayIndex = 6;
+						    var dayIndex = 6;
 				                
 			                for (var i = 0; i < 5; i++) {
 				                    // set a current day variable
@@ -226,10 +210,16 @@ var getJSON = function(url) {
 				                    // set the date variable using the selected
 									// day's unix time via my Unix_timestamp
 									// function
-				                    var date = Unix_timestamp(curDay.dt);
-				                    console.log
+				                    var date = Unix_timestamp(curDay.dt)
+				                    mydate[i]=date.toString();
+				                    
 				                    // set the weatherIcon src url
 				                    var weatherIcon1 = `https://openweathermap.org/img/wn/${curDay.weather[0].icon}@2x.png`;
+				    mytemp[i]=curDay.main.temp;
+				 // console.log("curDay.main.temp "+curDay.main.temp)
+				  console.log("curDay.main.temp  2  "+mytemp[i])
+				  
+				    myhumidity[i]=curDay.main.humidity;
 				    
 				                    // set the HTML to append
 				                    var dateHTML = `
@@ -238,9 +228,7 @@ var getJSON = function(url) {
 				                    <img src="${weatherIcon1}" alt="${curDay.weather[0].main}" width="50px" />
 				                    <p>Temp: ${curDay.main.temp}\xB0 F</p>
 				                    <p>Humidity: ${curDay.main.humidity}%</p>
-				                    </div>
-				                    `;
-				               
+				                    </div>  `;
 				                    
 				    document.getElementById("forecast").innerHTML+=dateHTML
 				                    // increment the dayIndex
@@ -249,12 +237,71 @@ var getJSON = function(url) {
 						}
 					};
 					xhreq1.send(null)
-			// ================================= end of
-			// forecast=======================
+// ================================= end of forecast=======================
 			}
 		};
+		
 		xhr.send()
-	};
+		// display bar chart for temperature forecast
+		new Chart(document.getElementById("bar-chart"), {
+		    type: 'bar',
+		    data: {
+		      labels:mydate,
+		      datasets: [
+		        {
+		          label: "Temperature",
+		          barThickness: 56,
+		          barPercentage: 0.5,
+
+		          backgroundColor: ["blue", "blue","blue","blue","blue"],
+		       data:mytemp
+		        }
+		      ]
+		    },
+		    options: {
+		    	responsive: true,
+		        maintainAspectRatio: false,
+		      legend: { display: true },
+		      title: {
+		        display: true,
+		        text: 'Temperature Forecast Chart'
+		      }
+		    }
+		});
+		// end temperature bar chart
+		
+		// display bar chart for Humidity forecast
+		new Chart(document.getElementById("bar-chart1"), {
+		    type: 'bar',
+		    data: {
+		      labels:mydate,
+		      datasets: [
+		        {
+		          label: "Humidity",
+		          barThickness: 56,
+		          barPercentage: 0.5,
+
+		          backgroundColor: ["blue", "blue","blue","blue","blue"],
+		       data:myhumidity
+		        }
+		      ]
+		    },
+		    options: {
+		    	responsive: true,
+		        maintainAspectRatio: false,
+		      legend: { display: true },
+		      title: {
+		        display: true,
+		        text: 'Humidity Forecast Chart'
+		      }
+		    }
+		});
+		// end temperature bar chart
+
+
+};
+	
+	
 	
 	function disp() {
 		var city = document.getElementById('city').value

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -22,6 +23,10 @@
 <script type="text/javascript" src="script/script1.js">
 	
 </script>
+<script src="script/Chart.js">
+		
+</script>
+
 </head>
 <body>
 
@@ -30,15 +35,7 @@
 		<!-- Header -->
 		<header class="text-center bg-dark text-white p-3">
 			<h1>My Weather App</h1>
-
 		</header>
-		<br>
-
-		<nav class="text-center bg-pnk text-black p-3 test">
-
-			<a href="index.html">Home</a> <a href="LogOut">Logout</a>
-		</nav>
-
 
 		<main class="row"> <!-- Search Column -->
 		<section class="col-md-4 pr-0 mb-3">
@@ -112,6 +109,19 @@
 					<div class="row" id="forecast"></div>
 				</div>
 			</section>
+			
+			<section>
+			
+			<canvas id="bar-chart" width="200" height="250" >
+			</canvas>
+			</section>
+			
+						<section>
+			<canvas id="bar-chart1" width="200" height="250" >
+
+			</canvas>
+			</section>
+			
 		</section>
 
 		</main>
