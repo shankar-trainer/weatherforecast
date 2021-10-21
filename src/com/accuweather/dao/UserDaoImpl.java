@@ -1,5 +1,6 @@
 package com.accuweather.dao;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,6 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.eclipse.jdt.internal.compiler.ast.ReturnStatement;
 
 import com.accuweather.dto.UserDTO;
 import com.accuweather.util.WeatherDataSource;

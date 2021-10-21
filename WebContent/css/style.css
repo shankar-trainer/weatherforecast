@@ -4,6 +4,12 @@
     font-size: 17px;
 }
 
+#city-header{
+	
+font-size: xx-large;
+color: blue;	
+}
+
 /* set to display none */
 .hide {
     display: none;

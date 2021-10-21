@@ -24,7 +24,7 @@
 	
 </script>
 <script src="script/Chart.js">
-		
+	
 </script>
 
 </head>
@@ -37,94 +37,114 @@
 			<h1>My Weather App</h1>
 		</header>
 
-		<main class="row"> <!-- Search Column -->
-		<section class="col-md-4 pr-0 mb-3">
-			<div class="card bg-light p-1 border-0">
-				<div class="card-body">
-					<div class="row">
-						<label for="search-input" class="font-weight-bold col-12 pl-0">Search
-							for a City</label> <input id="city" type="text"
-							class="form-control col-8" placeholder="Delhi"
-							aria-label="Recipient's username" aria-describedby="basic-addon2">
-						<span id="city_err"></span>
-						<button id="search-btn" class="btn btn-primary col-2 p-1"
-							onclick="disp()">
-							<i class="fas fa-search"></i>
-						</button>
-					</div>
-				</div>
-
-				<!-- List to render search history -->
-				<ul class="list-group list-group-flush border" id="search-history">
-
-				</ul>
-
-				<!-- Loading div -->
-				<div id="loading" class="hide">
-					<p>Loading...</p>
-				</div>
-			</div>
-		</section>
-
-		<!-- Weather response column -->
-		<section class="col-lg-8">
-			<!-- Section to display current weather -->
-			<section class="card hide p-3" id="current-weather-div">
-				<!-- City header -->
-				<h2 id="city-header" class="card-title"></h2>
-
-				<span> <img alt="" src="" id="weather-icon" /> <span
-					id="description"></span>
-				</span>
-				<div class="card-body">
-					<!-- City temperature -->
-					<div>
-						Temperature: <span id="city-temp"></span>
+		<main class="row">
+			<!-- Search Column -->
+			<section class="col-md-4 pr-0 mb-3">
+				<div class="card bg-light p-1 border-0">
+					<div class="card-body">
+						<div class="row">
+							<label for="search-input" class="font-weight-bold col-12 pl-0">Search
+								for a City</label> <input id="city" type="text"
+								class="form-control col-8" placeholder="Delhi"
+								aria-label="Recipient's username"
+								aria-describedby="basic-addon2"> <span id="city_err"></span>
+							<button id="search-btn" class="btn btn-primary col-2 p-1"
+								onclick="disp()">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
 					</div>
 
-					<!-- City Humidity -->
-					<div>
-						Humidity: <span id="city-humidity"></span>%
-					</div>
+					<!-- List to render search history -->
+					<ul class="list-group list-group-flush border" id="search-history">
 
-					<!-- City Wind Speed -->
-					<div>
-						Wind Speed: <span id="city-wind-speed"></span> MPH
-					</div>
+					</ul>
 
-					<!-- City UV Index -->
-					<div>
-						UV Index: <span id="city-UV" class="p-1 rounded"
-							style="background-color: aqua"></span>
+					<!-- Loading div -->
+					<div id="loading" class="hide">
+						<p>Loading...</p>
 					</div>
 				</div>
 			</section>
 
-			<!-- Section for 5 Day Forecast -->
-			<section class="card border-0 my-2 hide" id="weather-forecast-div">
-				<!-- Forecast Title -->
-				<h3 class="card-title">5-Day Forecast:</h3>
-				<div class="card-body">
-					<!-- Div row to append the forecast -->
-					<div class="row" id="forecast"></div>
-				</div>
-			</section>
-			
-			<section>
-			
-			<canvas id="bar-chart" width="200" height="250" >
+			<!-- Weather response column -->
+			<section class="col-lg-8">
+				<!-- Section to display current weather -->
+				<section class="card hide p-3" id="current-weather-div">
+					<!-- City header -->
+					<span id="city-header" class="card-title"> 
+					</span>
+					<span>
+					<a href="weather-history.html">Weather History</a>
+					</span>
+						<br>
+					<span> <img alt="" src="" id="weather-icon" /> <span
+						id="description"></span>
+					</span>
+					<div class="card-body">
+						<!-- City temperature -->
+						<div>
+							Temperature: <span id="city-temp"></span>
+						</div>
+
+						<!-- City Humidity -->
+						<div>
+							Humidity: <span id="city-humidity"></span>%
+						</div>
+
+						<!-- City Wind Speed -->
+						<div>
+							Wind Speed: <span id="city-wind-speed"></span> MPH
+						</div>
+
+						<!-- City UV Index -->
+						<div>
+							UV Index: <span id="city-UV" class="p-1 rounded"
+								style="background-color: aqua"></span>
+						</div>
+					</div>
+				</section>
+
+				<!-- Section for 5 Day Forecast -->
+				<section class="card border-0 my-2 hide" id="weather-forecast-div">
+					<!-- Forecast Title -->
+					<h3 class="card-title">5-Day Forecast:</h3>
+					<div class="card-body">
+						<!-- Div row to append the forecast -->
+						<div class="row" id="forecast"></div>
+					</div>
+				</section>
+
+				<section>
+
+					<canvas id="bar-chart" width="200" height="250">
 			</canvas>
-			</section>
-			
-						<section>
-			<canvas id="bar-chart1" width="200" height="250" >
+				</section>
+
+				<section>
+					<canvas id="bar-chart1" width="200" height="250">
 
 			</canvas>
+				</section>
+
 			</section>
-			
-		</section>
 
 		</main>
+	</div>
+	<div id="googleMap" style="width: 100%; height: 400px;"></div>
+
+	<script>
+		
+	</script>
+
+
+	<div id="googleMap" style="width: 100%; height: 400px;">
+
+		<h1>Weather Map</h1>
+
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA93l5zPyIvGB7oYGqzLSk28r5XuIs2Do8&callback=myMap"></script>
+
 	</div>
 </body>
 </html>

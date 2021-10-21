@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script>
+
+	function readTextFile(file, callback) {
+		var rawFile = new XMLHttpRequest();
+		rawFile.overrideMimeType("application/json");
+		rawFile.open("GET", file, true);
+		rawFile.onreadystatechange = function() {
+			if (rawFile.readyState === 4 && rawFile.status == "200") {
+				callback(rawFile.responseText);
+			}
+		}
+		rawFile.send(null);
+	}
+
+	var city = new Array()
+	var id2 = new Array()
+	var data;
+	//usage:
+	readTextFile("history.city.list.json", function(text) {
+		data = JSON.parse(text);
+		// console.log(data);
+		console.log("data id is " + data[0].id);
+		//console.log(data[0].city.name);
+		//document.getElementById("id1").innerHTML=data[0].city.name
+
+		console.log("length at line 30 " + data.length);
+		var select = document.getElementById("id1");
+		for (var i = 0; i < data.length; i++) {
+			var opt = data[i].city.name;
+			city[i] = data[i].city.name
+			//console.log("line 35 "+city[0])
+			id2[i] = data[i].id
+			//console.log(id2[0] + " is id 0")
+			var el = document.createElement("option");
+			el.textContent = opt;
+			el.value = opt;
+			select.appendChild(el);
+		}
+		//console.log("city...........inside  "+city)
+	});
+	var id5;
+	function getCity() {
+		console.log("hello called ")
+		var c = document.getElementById("id1").value
+		console.log(" city is " + c)
+
+		for (var i = 0; i < data.length; i++) {
+			if (city[i] == c) {
+				//alert("id is " + id2[i])
+				id5 = id2[i];
+				console.log("id5 is ...." + id5 + "   " + id2[i])
+				break;
+			}
+		}
+		getJSON();
+	}
+	//===================================start of history============================
+	var getJSON = function() {
+		console.log("id5 is " + id5)
+		document.getElementById("history").innerHTML = ""
+		url3 = "http://samples.openweathermap.org/data/2.5/history/city?id="
+				+ id5 + "&type=hour&appid=b1b15e88fa797225412429c1c50c122a1"
+		console.log("url  is " + url3)
+
+		//  url3 = "https://api.openweathermap.org/data/2.5/forecast?q="+data.name+"&units=imperial&appid=f4465c08026d2de3e9ae72cb65313ea1"
+
+		var xhreq1 = new XMLHttpRequest();
+		xhreq1.open('GET', url3, true)
+		xhreq1.onreadystatechange = function() {
+			if (xhreq1.readyState == 4 && xhreq1.status == 200) {
+				data1 = xhreq1.responseText
+				console.log("data1  is " + data1)
+
+				var data = JSON.parse(data1)
+				console.log("data  is " + data)
+				document.getElementById('history-div').style.display = "block"
+				document.getElementById('history').innerHTML = data1
+			}
+		}
+		xhreq1.send(null)
+	};
+</script>
+
+
+<!-- <script type="text/javascript" src="script/script1.js">
+	
+</script>
+<script src="script/Chart.js">
+	
+</script> -->
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+	
+</script>
+
+
+<!-- <script type="text/javascript" src="script/script1.js">
+	
+</script>
+<script src="script/Chart.js">
+	
+</script> -->
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<link
+	href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css"
+	media="all" rel="stylesheet">
+<link
+	href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css"
+	media="all" rel="stylesheet">
+<link
+	href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css"
+	media="all" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<title>Weather App</title>
+
+
+</head>
+<body>
+	<div class="container-fluid">
+		<!-- Header -->
+		<header class="text-center bg-dark text-white p-3">
+			<h1>Weather History</h1>
+		</header>
+		<main class="row">
+			<h1>Select City</h1>
+
+			<select id="id1" onchange="getCity()">
+				<option>Select City</option>
+			</select> <br> <br> <br> <br>
+
+			<section class="card border-0 my-2 hide" id="history-div">
+				<!-- Forecast Title -->
+				<h3 class="card-title">3-Day History:</h3>
+				<div class="card-body">
+					<!-- Div row to append the forecast -->
+					<div class="row" id="history"></div>
+				</div>
+			</section>
+		</main>
+	</div>
+	<!-- 	<button onclick="hello()">click</button>
+ -->
+</body>
+</html>

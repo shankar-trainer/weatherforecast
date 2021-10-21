@@ -1,9 +1,19 @@
+		function myMap() {
+			var mapProp = {
+				center : new google.maps.LatLng(28.644800, 77.216721),
+				zoom : 8,
+			};
+			var map = new google.maps.Map(document.getElementById("googleMap"),
+					mapProp);
+		}
+		
+
 function timer1(){
 	console.log("timer called ")
-x=10;
-setInterval(function() {
-document.getElementById('id1').innerHTML=--x;	
-}, 1000);
+	x=10;
+	setInterval(function() {
+	document.getElementById('id1').innerHTML=--x;	
+	}, 1000);
 }
 
 function validate() {
@@ -125,19 +135,18 @@ function Unix_timestamp(t) {
 
 
 var getJSON = function(url) {
-
+	var lat;
+	var lon;
+	
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', url, true)
 		xhr.responseType = 'json'
 			var mytemp=new Array(5);
   		var myhumidity=new Array(5);
   		var mydate=new Array(5);
-
-			
 		xhr.onload = function() {
 			var status = xhr.status
 			if (status == 200) {
-				console.log("called..")
 				data = xhr.response
 
 				var weatherIcon = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
@@ -149,15 +158,15 @@ var getJSON = function(url) {
 						+ " " + `${myDate.toDateString()}`
 
 				document.getElementById('city-temp').innerHTML = data.main.temp+" "+'&deg;C;'
-				
 				document.getElementById('city-humidity').innerHTML = data.main.humidity
 				document.getElementById('city-wind-speed').innerHTML = data.wind.speed
 
-				// ==================== uv idex
-				var lat = data.coord.lat
-				var lon = data.coord.lon
-               	// console.log("lat "+lat)
-               	// console.log("longitude "+lon)
+				// ==================== uv idex===================
+		lat = data.coord.lat
+		lon = data.coord.lon
+    /*
+	 * console.log("lat .. "+lat) console.log("longitude .. "+lon)
+	 */
 				var url1 = "http://api.openweathermap.org/data/2.5/uvi?APPID=9497495fcb2dd582affb661398fb07ad&lat="
 						+ lat + "&lon=" + lon
 
@@ -167,22 +176,16 @@ var getJSON = function(url) {
 					if (xhreq.readyState == 4 && xhreq.status == 200) {
 						data = xhreq.responseText
 						var obj = JSON.parse(data)
-
 						document.getElementById("city-UV").innerHTML = obj.value
-						// document.getElementById("city-UV").style.color
-						// ="#ffffff"
 					}
 				};
 				xhreq.send(null)
 	// ===============================end of uvi====
-
-	// ==========================start forecast
-				    document.getElementById("forecast").innerHTML=""
+	// ==========================start forecast============================
+				document.getElementById("forecast").innerHTML=""
 				url3 = "https://api.openweathermap.org/data/2.5/forecast?q="+data.name+"&units=imperial&appid=f4465c08026d2de3e9ae72cb65313ea1"
-			
-							
-				
-					var xhreq1 = new XMLHttpRequest();
+
+				var xhreq1 = new XMLHttpRequest();
 					xhreq1.open('GET', url3, true)
 					xhreq1.onreadystatechange = function() {
 						if (xhreq1.readyState == 4 && xhreq1.status == 200) {
@@ -242,6 +245,7 @@ var getJSON = function(url) {
 		};
 		
 		xhr.send()
+		
 		// display bar chart for temperature forecast
 		new Chart(document.getElementById("bar-chart"), {
 		    type: 'bar',
@@ -297,12 +301,40 @@ var getJSON = function(url) {
 		    }
 		});
 		// end temperature bar chart
-
-
 };
-	
-	
-	
+
+
+var getMap = function(url) {
+
+	var lat;
+	var lon;
+	console.log("getmap called ...........")
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', url, true)
+		xhr.responseType = 'json'
+		xhr.onload = function() {
+			var status = xhr.status
+			if (status == 200) {
+				data = xhr.response
+
+			lat = data.coord.lat
+		lon = data.coord.lon
+    // ================================= end of forecast=======================
+		console.log("my lat.. "+lat)
+		console.log("my longitude... "+lon)
+		
+		var mapProp= {
+					  center:new google.maps.LatLng(lat,lon),
+					  zoom:8,
+					};
+					var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);	
+			}
+		};
+		xhr.send()
+		
+		console.log("my lat...... "+lat)
+		console.log("my longitude...... "+lon)
+};
 	function disp() {
 		var city = document.getElementById('city').value
 		console.log("city is "+city)
@@ -314,5 +346,9 @@ var getJSON = function(url) {
 			url = "http://api.openweathermap.org/data/2.5/weather?q=" + city
 					+ "&APPID=9497495fcb2dd582affb661398fb07ad&units=metric"
 			getJSON(url);
+			getMap(url);
 		}
 	}
+	
+	//  weather history ====================================
+	

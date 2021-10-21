@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> <!-- Bootstrap Link -->
-    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all" rel="stylesheet"> <!-- Font awesome link -->
-    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all" rel="stylesheet"> <!-- Font awesome link -->
-    <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet"> <!-- Font awesome link -->
-    <link rel="stylesheet" href="assets/style.css" type="text/css"> <!-- My Style Sheet -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- jQuery link -->
-
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-
 <script type="text/javascript">
 	var getJSON = function(url) {
 
@@ -23,7 +12,7 @@
 			var status = xhr.status
 			if (status == 200) {
 				data = xhr.response
-				document.getElementById('id1').style.visibility="visible"
+				document.getElementById('id1').style.visibility = "visible"
 
 				var cord1 = "Longitude " + data.coord.lon + "<br>Latitude"
 						+ data.coord.lat
@@ -37,10 +26,11 @@
 				document.getElementById('wea').innerHTML = weather
 
 				var main = "Temperature " + data.main.temp + "&deg;<br>Min "
-						+ data.main.temp_min + "&deg;<br>Max " + data.main.temp_max
-						+ "&deg;<br>Pressure " + data.main.pressure
-						+ "<br>Sea Level " + data.main.sea_level
-						+ "<br>Ground Level" + data.main.grnd_level
+						+ data.main.temp_min + "&deg;<br>Max "
+						+ data.main.temp_max + "&deg;<br>Pressure "
+						+ data.main.pressure + "<br>Sea Level "
+						+ data.main.sea_level + "<br>Ground Level"
+						+ data.main.grnd_level
 
 				document.getElementById('main').innerHTML = main
 
@@ -62,28 +52,13 @@
 		else {
 			url = "http://api.openweathermap.org/data/2.5/weather?q=" + city
 					+ "&APPID=9497495fcb2dd582affb661398fb07ad&units=metric"
-			//document.getElementById('city_err').innerHTML=""
-			//document.getElementById('city1').innerHTML="City is "+city
 			getJSON(url);
 		}
 	}
 </script>
 
-
 </head>
 <body>
-<%  
-/* 
-Object  obj=  session.getAttribute("userstatus");
-
-if(obj==null)
-session.setAttribute("user1", null);
-else if(obj.toString().equals("user created"))
-session.setAttribute("user1", "user1");
-else
-session.setAttribute("user1", null); */
-	
-%>
 
 	<form>
 		<input id="city" placeholder="Enter City Name"> <span
@@ -93,39 +68,28 @@ session.setAttribute("user1", null); */
 
 	<div id='city1'></div>
 
-	<div id="id1" style="visibility:hidden">
-	
-	   <h2>City Name</h2>
-	   <div id='city2'></div>
-	   
-		<h2>Coordinates</h2>
+	<div id="id1" style="visibility: hidden">
 
+		<h2>City Name</h2>
+		<div id='city2'></div>
+
+		<h2>Coordinates</h2>
 		<div id="cord"></div>
 
 		<h2>Weather</h2>
-
 		<div id="wea"></div>
 
 		<h2>Main</h2>
-
 		<div id="main"></div>
 
 
 
 		<h2>Wind</h2>
-
 		<div id="wind"></div>
-
-
 
 		<h2>Rain</h2>
 
 		<div id="wind"></div>
 	</div>
-
-
-
-
-
 </body>
 </html>
